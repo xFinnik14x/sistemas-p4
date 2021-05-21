@@ -163,3 +163,19 @@ int matrix_multi_parallel (
 	return EXIT_SUCCESS;
 
 }
+
+long double matrix_max (long double* A, int sizeMat)
+{
+	int element, totalElem;
+	
+	long double max = 0;
+	totalElem = sizeMat * sizeMat;
+	for(element = 0; element < totalElem; element++)
+	{
+		if (*(A + element) > max) {
+			max = *(A + element);
+		}
+	}
+	
+	return max;
+}
