@@ -104,5 +104,32 @@ Output: EXIT_FAILURE; EXIT_SUCCESS*/
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Inserte el código solicitado en la práctica aqui.
+int matrix_multi (
+	long double *result, long double *A, long double *B, int mat_size
+) {
 
+	if(!result || !A || !B)
+	{
+		printf("Error in a matrix pointer\n");
+		return EXIT_FAILURE;
+	}
+
+	int c = 0, d = 0, k = 0;
+	// long double tot = 0;
+	long double *res = result;
+	for (c = 0; c < mat_size; c++) {
+		for (d = 0; d < mat_size; d++) {
+			for (k = 0; k < mat_size; k++) {
+				// tot = tot + A[c][k] * B[k][d];
+				*(res+c*mat_size+d) += *(A + c*mat_size + k) * *(B+k*mat_size+d);
+			}
+
+			// result[c][d] = tot;
+			// tot = 0;
+		}
+	}
+
+	return EXIT_SUCCESS;
+
+}
 
