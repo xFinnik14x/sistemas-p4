@@ -133,3 +133,33 @@ int matrix_multi (
 
 }
 
+int matrix_multi_parallel (
+	long double *result, long double *A, long double *B, int mat_size
+) {
+
+	if(!result || !A || !B)
+	{
+		printf("Error in a matrix pointer\n");
+		return EXIT_FAILURE;
+	}
+
+	long double *res = result;
+	#pragma omp parallel
+    {
+        int i, j, k;
+        #pragma omp for
+        for (i = 0; i < mat_size; i++) { 
+            for (j = 0; j < mat_size; j++) {
+                double dot  = 0;
+                for (k = 0; k < mat_size; k++) {
+                    dot += A[i*mat_size+k]*B[k*mat_size+j];
+                } 
+                res[i*mat_size+j ] = dot;
+            }
+        }
+
+    }
+
+	return EXIT_SUCCESS;
+
+}
